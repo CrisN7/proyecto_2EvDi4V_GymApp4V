@@ -1,21 +1,105 @@
-<div class="activitiesContainer mx-auto p-3">
-    <div class="activityHour">
-        <p>10:00</p>
-        <p>11:30</p>
-    </div>
-    <div class="activityInfo secondary-color">
-        <div>
-            <img src="icons/person.svg" alt="person-icon">
-            <p>Miguel Goyena</p>
+<div class="w-100 p-3">
+    <div class="w-100" *ngIf="activitiesOfTheDay['firstActivity']; else freeActivity">
+        <div class="activityCardHour">
+            <p>10:00</p>
+            <p>11:30</p>
         </div>
-        <img class="ms-auto" src="icons/spinning.svg" alt="spinning-icon">
-        <div class="activityOptions">
-            <a href="">
-                <img src="icons/trash.svg" alt="trash-icon">
-            </a>
-            <a href="">
-                <img src="icons/edit.svg" alt="edit-icon">
-            </a>
+        <div class="activityCardInfo secondary-color">
+            <div class="text-center">
+                <img src="icons/person.svg" alt="person-icon">
+                <p>{{activitiesOfTheDay["firstActivity"].monitores[0].nombre}}</p>
+            </div>
+            <img class="ms-auto" [src]="activitiesOfTheDay['firstActivity'].img" alt="spinning-icon">
+            <div class="activityOptions">
+                <a href="">
+                    <img class="activityOptionIcon" src="icons/trash.svg" alt="trash-icon">
+                </a>
+                <a href="">
+                    <img class="activityOptionIcon" src="icons/edit.svg" alt="edit-icon">
+                </a>
+            </div>
         </div>
     </div>
+    <ng-template #freeActivity>
+            <div class="activityCardHour">
+                <p>10:00</p>
+                <p>11:30</p>
+            </div>
+            <div class="bg-success activityCardInfo position-relative">
+                <p class="fs-2 fw-bold text-white">FREE</p>
+                <a href="">
+                    <img src="icons/add.svg" alt="add-icon" class="position-absolute top-0 end-0">
+                </a>
+            </div>
+    </ng-template>
+        
+    <div class="w-100" *ngIf="activitiesOfTheDay['secondActivity']; else freeActivity">
+        <div class="activityCardHour">
+            <p>13:30</p>
+            <p>15:00</p>
+        </div>
+        <div class="activityCardInfo secondary-color">
+            <div class="text-center">
+                <img src="icons/person.svg" alt="person-icon">
+                <p>{{activitiesOfTheDay["secondActivity"].monitores[0].nombre}}</p>
+            </div>
+            <img class="ms-auto activityImg primary-color" [src]="activitiesOfTheDay['secondActivity'].img" alt="spinning-icon">
+            <div class="activityOptions">
+                <a href="">
+                    <img class="activityOptionIcon" src="icons/trash.svg" alt="trash-icon">
+                </a>
+                <a href="">
+                    <img class="activityOptionIcon" src="icons/edit.svg" alt="edit-icon">
+                </a>
+            </div>
+        </div>
+    </div>
+    <ng-template #freeActivity>
+        <div class="activityCardHour">
+            <p>10:00</p>
+            <p>11:30</p>
+        </div>
+        <div class="bg-success activityCardInfo position-relative">
+            <p class="fs-2 fw-bold text-white">FREE</p>
+            <a href="" (click)="addActivity()">
+                <img src="icons/add.svg" alt="add-icon" class="position-absolute top-0 end-0">
+            </a>
+        </div>
+    </ng-template>
+
+    <div class="w-100" *ngIf="activitiesOfTheDay['thirdActivity']; else freeActivity">
+        <div class="activityCardHour">
+            <p>17:30</p>
+            <p>19:00</p>
+        </div>
+        <div class="activityCardInfo secondary-color">
+            <div class="text-center">
+                <img src="icons/person.svg" alt="person-icon">
+                <p>{{activitiesOfTheDay["thirdActivity"].monitores[0].nombre}}</p>
+            </div>
+            <img class="ms-auto" [src]="activitiesOfTheDay['thirdActivity'].img" alt="spinning-icon">
+            <div class="activityOptions">
+                <a href="">
+                    <img class="activityOptionIcon" src="icons/trash.svg" alt="trash-icon">
+                </a>
+                <a href="">
+                    <img class="activityOptionIcon" src="icons/edit.svg" alt="edit-icon">
+                </a>
+            </div>
+        </div>
+    </div>
+    <ng-template #freeActivity>
+        <div class="activityCardHour">
+            <p>10:00</p>
+            <p>11:30</p>
+        </div>
+        <div class="bg-success activityCardInfo position-relative">
+            <p class="fs-2 fw-bold text-white">FREE</p>
+            <a href="">
+                <img src="icons/add.svg" alt="add-icon" class="position-absolute top-0 end-0">
+            </a>
+        </div>
+    </ng-template>
+
+    
 </div>

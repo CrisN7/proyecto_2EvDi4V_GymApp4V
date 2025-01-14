@@ -11,30 +11,56 @@
     width: 40%;
 }
 
-.activityHour{
+.activityCardHour{
     width: 10%;
     display: inline-flex;
     flex-direction: column;
-    justify-content: center;
     text-align: center;
+
+    p {
+        margin-bottom: 0px;
+    }
 }
 
-.activityInfo {
+.activityCardInfo {
     width: 90%;
+    height: 130px;
     padding: 10px;
     display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+        margin-bottom: 0px;
+    }
+
+    .activityImg {
+        width: 100px;
+        height: 132px;
+    }
 
     .activityOptions {
-        margin-left: 10px;
+        height: 100%;
+        margin-left: 30px;
         display: inline-flex;
         flex-direction: column;
         justify-content: space-between;
         text-align: center;
+
+        .activityOptionIcon {
+            width: 35px;
+            height: 35px;
+        }
     }
 }
 
-.activityOptionsImg {
-    width: 70px;
-    height: 70px;
-    margin-right: 40px;
+
+.formAddACtivityContainer {
+    width: 50%;
+    height: 400px;
+    background-color: #D25B5B;
+    //position: absolute;
+
+
+    
 }
