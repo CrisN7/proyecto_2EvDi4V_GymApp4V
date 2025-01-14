@@ -6,3 +6,35 @@
 .secondary-color{
     background-color: #D9D9D9;
 }
+
+.activitiesContainer {
+    width: 40%;
+}
+
+.activityHour{
+    width: 10%;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.activityInfo {
+    width: 90%;
+    padding: 10px;
+    display: inline-flex;
+
+    .activityOptions {
+        margin-left: 10px;
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: center;
+    }
+}
+
+.activityOptionsImg {
+    width: 70px;
+    height: 70px;
+    margin-right: 40px;
+}
