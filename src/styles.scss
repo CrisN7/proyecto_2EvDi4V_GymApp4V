@@ -50,17 +50,54 @@
         .activityOptionIcon {
             width: 35px;
             height: 35px;
+
+            
         }
     }
 }
 
+.imageHover:hover {
+    opacity: 0.8; /* Reduce la opacidad al pasar el cursor */
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño */
+    transition: all 0.3s ease-in-out; /* Agrega una transición suave */
+}
+
+.activityOptionsImg {
+    width: 45px;
+    height: 45px;
+}
 
 .formAddACtivityContainer {
     width: 50%;
     height: 400px;
-    background-color: #D25B5B;
-    //position: absolute;
-
-
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #191919;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     
+
+    select {
+        width: 60%;
+        height: 40px;
+        background-color: #D9D9D9;
+    }
+
+    button {
+        width: 150px;
+        height: 35px;
+        color: white;
+        border-radius: 15px;
+        background-color: #D25B5B;
+        border: none;
+
+        &:first-child {
+            margin-right: 50px;
+        }
+    }
 }

@@ -17,9 +17,9 @@ export class ActivitiesService {
 
   constructor(private monitorsService: MonitorsService) { 
 
-    this.activitySpinning = new Activity("Spinning", "icons/spinning.svg", [monitorsService.monitorGoyena], "10:00", "11:30");
-    this.activityBodyPump = new Activity("BodyPump", "icons/bodypump.svg", [monitorsService.monitorJoaquin, monitorsService.monitorDominguez], "10:00", "11:30");
-    this.activityPilates = new Activity("Pilates", "icons/pilates.svg", [monitorsService.monitorGoyena, monitorsService.monitorRodriguez], "10:00", "11:30");
+    this.activitySpinning = new Activity("Spinning", "icons/spinning.svg", [monitorsService.monitorGoyena]);
+    this.activityBodyPump = new Activity("BodyPump", "icons/bodypump.svg", [monitorsService.monitorJoaquin, monitorsService.monitorDominguez]);
+    this.activityPilates = new Activity("Pilates", "icons/pilates.svg", [monitorsService.monitorGoyena, monitorsService.monitorRodriguez]);
 
 
     this.activitiesList = [this.activitySpinning, this.activityBodyPump, this.activityPilates];

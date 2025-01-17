@@ -1,11 +1,171 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms'; 
+import { ActivitiesService } from '../services/activities.service';
+import { Activity } from '../models/activity';
+import { CommonModule } from '@angular/common';
+import { Monitor } from '../models/monitor';
+import { MonitorsService } from '../services/monitors.service';
+import { DeleteAlertComponent } from "../delete-alert/delete-alert.component";
+
 
 @Component({
   selector: 'app-form-add-activity',
-  imports: [],
+  imports: [ReactiveFormsModule, CommonModule, DeleteAlertComponent],
   templateUrl: './form-add-activity.component.html',
   styleUrl: './form-add-activity.component.scss'
 })
-export class FormAddActivityComponent {
+export class FormAddActivityComponent implements OnChanges, AfterViewInit {
 
+  //Estas propiedades son elementos select en el formulario, cada uno esta vinculado a un formControl
+  activityName = new FormControl('');
+  activityMonitorName1 = new FormControl('');
+  activityMonitorName2 = new FormControl('');
+
+  allActivities: Activity[];
+  allMonitors: Monitor[];
+
+  constructor(private activitiesService: ActivitiesService, private monitorsService: MonitorsService) { 
+    this.allActivities = activitiesService.activitiesList;
+    this.allMonitors = monitorsService.monitorsList;
+  }
+
+  @Input() activityToEdit: Activity | undefined;
+  
+  //Esto no es buena practica segun chatgpt
+  //let activitySelectOptions: HTMLOptionsCollection = (document.getElementById('activitySelect') as HTMLSelectElement).options;
+  //let monitorSelect1Options: HTMLOptionsCollection = (document.getElementById('monitorSelect1') as HTMLSelectElement).options;
+  //let monitorSelect2Options: HTMLOptionsCollection = (document.getElementById('monitorSelect2') as HTMLSelectElement).options;
+
+
+  @ViewChild('activitySelect') activitySelect!: ElementRef<HTMLSelectElement>;
+  @ViewChild('monitorSelect1') monitorSelect1!: ElementRef<HTMLSelectElement>; 
+  @ViewChild('monitorSelect2') monitorSelect2!: ElementRef<HTMLSelectElement>;  
+  isViewInitialized = false;
+
+  ngOnChanges(changes: SimpleChanges): void {//Este método se ejecuta automáticamente cuando cambia un valor en una propiedad decorada con @Input.
+    console.log("onchanges del form ts: " + this.activityToEdit);
+
+    if (this.activityToEdit !== undefined && this.isViewInitialized) {
+      let activitySelectOptions = this.activitySelect.nativeElement.options;
+      let monitorSelect1Options = this.monitorSelect1.nativeElement.options;
+      let monitorSelect2Options = this.monitorSelect2.nativeElement.options;
+      //this.clearSelectedOptions(activitySelectOptions);
+      //this.clearSelectedOptions(monitorSelect1Options);
+      //this.clearSelectedOptions(monitorSelect2Options);
+
+      for(let i = 0; i < activitySelectOptions.length; i++) {
+
+        if(activitySelectOptions[i].value === "") {
+          activitySelectOptions[i].hidden = true;
+        }
+
+        if(activitySelectOptions[i].value === this.activityToEdit.name) {
+          activitySelectOptions[i].selected = true;
+        }
+      }
+
+      for(let i = 0; i < monitorSelect1Options.length; i++) {
+
+        if(monitorSelect1Options[i].value === "") {
+          monitorSelect1Options[i].hidden = true;
+        }
+
+        if(monitorSelect1Options[i].value === this.activityToEdit.monitors[0].name) {
+          monitorSelect1Options[i].selected = true;
+        }
+      }
+
+      if(this.activityToEdit.monitors[1] === undefined) {
+        for(let i = 0; i < monitorSelect2Options.length; i++) {
+
+          if(monitorSelect2Options[i].value === "") {
+            monitorSelect2Options[i].hidden = false;
+            monitorSelect2Options[i].selected = true;
+          }
+        }
+
+        return;
+      }
+
+      for(let i = 0; i < monitorSelect2Options.length; i++) {
+
+        if(monitorSelect2Options[i].value === "") {
+          monitorSelect2Options[i].hidden = true;
+        }
+
+        if(monitorSelect2Options[i].value === this.activityToEdit.monitors[1]?.name) {
+          monitorSelect2Options[i].selected = true;
+        }
+      }
+
+    }
+
+    if (this.activityToEdit == undefined && this.isViewInitialized) {
+      let activitySelectOptions = this.activitySelect.nativeElement.options;
+      let monitorSelect1Options = this.monitorSelect1.nativeElement.options;
+      let monitorSelect2Options = this.monitorSelect2.nativeElement.options;
+      //this.clearSelectedOptions(activitySelectOptions);
+      //this.clearSelectedOptions(monitorSelect1Options);
+      //this.clearSelectedOptions(monitorSelect2Options);
+
+      for(let i = 0; i < activitySelectOptions.length; i++) {
+
+        if(activitySelectOptions[i].value === "") {
+          activitySelectOptions[i].hidden = false;
+          activitySelectOptions[i].selected = true;
+        }
+      }
+
+      for(let i = 0; i < monitorSelect1Options.length; i++) {
+
+        if(monitorSelect1Options[i].value === "") {
+          monitorSelect1Options[i].hidden = false;
+          monitorSelect1Options[i].selected = true;
+        }
+      }
+
+      for(let i = 0; i < monitorSelect2Options.length; i++) {
+
+        if(monitorSelect2Options[i].value === "") {
+          monitorSelect2Options[i].hidden = false;
+          monitorSelect2Options[i].selected = true;
+        }
+      }
+    }
+  }
+
+  clearSelectedOptions(options: HTMLOptionsCollection) {
+    for(let i = 0; i < options.length; i++) {
+      options[i].selected = false;
+    }
+  }
+
+  ngAfterViewInit() {
+    console.log("afterViewInit del form ts: " + this.isViewInitialized);
+
+
+    console.log(this.activitySelect);
+    console.log(this.monitorSelect1);
+    console.log(this.monitorSelect2);
+
+    this.isViewInitialized = true;
+
+
+    console.log("afterViewInit del form ts: " + this.isViewInitialized);
+  }
+
+  saveActivity() {
+
+  }
+
+
+  /*
+    @Output() es un DECORADOR en Angular que marca una propiedad de un componente hijo(osea este componente) como un EMISOR DE EVENTOS, es decir declaramos closeFormEvent como un emisor de eventos. Esto permite que el componente hijo pueda notificar eventos al componente padre.
+  */
+  @Output() closeFormEventEmitter = new EventEmitter<boolean>();
+  closeFormActivity() {
+    this.closeFormEventEmitter.emit(true);//El método emit() de EventEmitter se usa para enviar un evento desde el hijo hacia el padre. Cuando llamas a emit(), estás "disparando" el evento y, opcionalmente, puedes incluir un valor que se envía al componente padre.
+  }
 }
+
+

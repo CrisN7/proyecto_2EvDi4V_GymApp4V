@@ -2,18 +2,14 @@ import { Monitor } from "./monitor";
 
 export class Activity {
 
-    nombre: string;
+    name: string;
     img: string;
-    monitores: Monitor[];
-    horaInicio: string;
-    horaFin: string;
+    monitors: Monitor[];
 
-    constructor(nombre: string, img: string, monitores: Monitor[], horaInicio: string, horaFin: string) {
-        this.nombre = nombre;
+    constructor(nombre: string, img: string, monitores: Monitor[]) {
+        this.name = nombre;
         this.img = img;
-        this.monitores = monitores;
-        this.horaInicio = horaInicio;
-        this.horaFin = horaFin;
+        this.monitors = monitores;
     }
 
 

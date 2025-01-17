@@ -1,22 +1,26 @@
 <div class="w-100 p-3">
+
+    <!--Primera activity card del día-->
     <div class="w-100" *ngIf="activitiesOfTheDay['firstActivity']; else freeActivity">
         <div class="activityCardHour">
             <p>10:00</p>
             <p>11:30</p>
         </div>
         <div class="activityCardInfo secondary-color">
-            <div class="text-center">
+            <div class="text-center me-3">
                 <img src="icons/person.svg" alt="person-icon">
-                <p>{{activitiesOfTheDay["firstActivity"].monitores[0].nombre}}</p>
+                <p>{{activitiesOfTheDay["firstActivity"].monitors[0].name}}</p>
             </div>
+            
+            <div class="text-center me-3" *ngIf="activitiesOfTheDay['firstActivity'].monitors.length > 1">
+                <img src="icons/person.svg" alt="person-icon">
+                <p>{{activitiesOfTheDay["firstActivity"].monitors[1].name}}</p>
+            </div>
+            
             <img class="ms-auto" [src]="activitiesOfTheDay['firstActivity'].img" alt="spinning-icon">
             <div class="activityOptions">
-                <a href="">
-                    <img class="activityOptionIcon" src="icons/trash.svg" alt="trash-icon">
-                </a>
-                <a href="">
-                    <img class="activityOptionIcon" src="icons/edit.svg" alt="edit-icon">
-                </a>
+                <img class="activityOptionIcon" src="icons/trash.svg" alt="trash-icon" (click)="showDeleteAlert()">
+                <img class="activityOptionIcon" src="icons/edit.svg" alt="edit-icon" (click)="showActivityForm(activitiesOfTheDay['firstActivity'])">
             </div>
         </div>
     </div>
@@ -27,30 +31,29 @@
             </div>
             <div class="bg-success activityCardInfo position-relative">
                 <p class="fs-2 fw-bold text-white">FREE</p>
-                <a href="">
-                    <img src="icons/add.svg" alt="add-icon" class="position-absolute top-0 end-0">
-                </a>
+                <img src="icons/add.svg" alt="add-icon" class="position-absolute top-0 end-0" (click)="showActivityForm()">
             </div>
     </ng-template>
         
+    <!--Segunda activity card del día-->
     <div class="w-100" *ngIf="activitiesOfTheDay['secondActivity']; else freeActivity">
         <div class="activityCardHour">
             <p>13:30</p>
             <p>15:00</p>
         </div>
         <div class="activityCardInfo secondary-color">
-            <div class="text-center">
+            <div class="text-center me-3">
                 <img src="icons/person.svg" alt="person-icon">
-                <p>{{activitiesOfTheDay["secondActivity"].monitores[0].nombre}}</p>
+                <p>{{activitiesOfTheDay["secondActivity"].monitors[0].name}}</p>
+            </div>
+            <div class="text-center me-3" *ngIf="activitiesOfTheDay['secondActivity'].monitors.length > 1">
+                <img src="icons/person.svg" alt="person-icon">
+                <p>{{activitiesOfTheDay["secondActivity"].monitors[1].name}}</p>
             </div>
             <img class="ms-auto activityImg primary-color" [src]="activitiesOfTheDay['secondActivity'].img" alt="spinning-icon">
             <div class="activityOptions">
-                <a href="">
-                    <img class="activityOptionIcon" src="icons/trash.svg" alt="trash-icon">
-                </a>
-                <a href="">
-                    <img class="activityOptionIcon" src="icons/edit.svg" alt="edit-icon">
-                </a>
+                <img class="activityOptionIcon" src="icons/trash.svg" alt="trash-icon" (click)="showDeleteAlert()">
+                <img class="activityOptionIcon" src="icons/edit.svg" alt="edit-icon" (click)="showActivityForm(activitiesOfTheDay['secondActivity'])">
             </div>
         </div>
     </div>
@@ -61,30 +64,29 @@
         </div>
         <div class="bg-success activityCardInfo position-relative">
             <p class="fs-2 fw-bold text-white">FREE</p>
-            <a href="" (click)="addActivity()">
-                <img src="icons/add.svg" alt="add-icon" class="position-absolute top-0 end-0">
-            </a>
+            <img src="icons/add.svg" alt="add-icon" class="position-absolute top-0 end-0 imageHover" (click)="showActivityForm()">
         </div>
     </ng-template>
 
+    <!--Tercera activity card del día-->
     <div class="w-100" *ngIf="activitiesOfTheDay['thirdActivity']; else freeActivity">
         <div class="activityCardHour">
             <p>17:30</p>
             <p>19:00</p>
         </div>
         <div class="activityCardInfo secondary-color">
-            <div class="text-center">
+            <div class="text-center me-3">
                 <img src="icons/person.svg" alt="person-icon">
-                <p>{{activitiesOfTheDay["thirdActivity"].monitores[0].nombre}}</p>
+                <p>{{activitiesOfTheDay["thirdActivity"].monitors[0].name}}</p>
             </div>
+            <div class="text-center me-3" *ngIf="activitiesOfTheDay['thirdActivity'].monitors.length > 1">
+                <img src="icons/person.svg" alt="person-icon">
+                <p>{{activitiesOfTheDay["thirdActivity"].monitors[1].name}}</p>
+            </div> 
             <img class="ms-auto" [src]="activitiesOfTheDay['thirdActivity'].img" alt="spinning-icon">
             <div class="activityOptions">
-                <a href="">
-                    <img class="activityOptionIcon" src="icons/trash.svg" alt="trash-icon">
-                </a>
-                <a href="">
-                    <img class="activityOptionIcon" src="icons/edit.svg" alt="edit-icon">
-                </a>
+                <img class="activityOptionIcon " src="icons/trash.svg" alt="trash-icon" (click)="showDeleteAlert()">
+                <img class="activityOptionIcon" src="icons/edit.svg" alt="edit-icon" (click)="showActivityForm(activitiesOfTheDay['thirdActivity'])">
             </div>
         </div>
     </div>
@@ -95,11 +97,14 @@
         </div>
         <div class="bg-success activityCardInfo position-relative">
             <p class="fs-2 fw-bold text-white">FREE</p>
-            <a href="">
-                <img src="icons/add.svg" alt="add-icon" class="position-absolute top-0 end-0">
-            </a>
+            <img src="icons/add.svg" alt="add-icon" class="position-absolute top-0 end-0 imageHover" (click)="showActivityForm()">
         </div>
     </ng-template>
-
-    
 </div>
+<app-form-add-activity [hidden]="isFormHidden" [activityToEdit]="activitySentToEdit" (closeFormEventEmitter)="isFormHidden = $event"></app-form-add-activity>
+<!--
+Durante la creación, Angular evalúa el enlace [activityToEdit]="'Valor Inicial'" y asigna ese valor a la propiedad decorada con @Input en el componente hijo.
+Como este valor fue "cambiado" desde undefined (por defecto) a "Valor Inicial", Angular ejecuta automáticamente el ngOnChanges en el hijo.
+Esto sucede porque Angular considera la inicialización de una propiedad decorada con @Input como un cambio en el valor, incluso si es la primera vez que se asigna.
+-->
+<app-delete-alert [hidden]="isDeleteAlertHidden" (closeDeleteAlertEventEmitter)="isDeleteAlertHidden = $event"></app-delete-alert>

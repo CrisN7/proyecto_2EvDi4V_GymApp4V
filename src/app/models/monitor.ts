@@ -1,12 +1,12 @@
 export class Monitor {
 
-    nombre: string;
+    name: string;
     email: string;
-    numeroTelefono: string;
+    telephoneNumber: string;
 
     constructor(nombre: string, email: string, numeroTelefono: string) {
-        this.nombre = nombre;
+        this.name = nombre;
         this.email = email;
-        this.numeroTelefono = numeroTelefono;
+        this.telephoneNumber = numeroTelefono;
     }
 }

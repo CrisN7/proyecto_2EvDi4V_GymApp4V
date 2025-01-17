@@ -11,6 +11,7 @@ export class MonitorsService {
   monitorDominguez = new Monitor("Lurdes Dominguez", "ldominguez@gmail.com", "643231413");
   monitorJoaquin = new Monitor("Joaquín Rodriguez", "jrodri@hotmail.es", "643231413");
 
+  monitorsList: Monitor[] = [this.monitorGoyena, this.monitorRodriguez, this.monitorDominguez, this.monitorJoaquin];
 
   constructor() { }
 }

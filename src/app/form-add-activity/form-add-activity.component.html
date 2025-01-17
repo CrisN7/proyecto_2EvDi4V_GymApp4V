@@ -1,6 +1,26 @@
+<!--
+disabled: Impide que se pueda seleccionar esta opción.
+selected: La marca como seleccionada por defecto.
+Al usar disabled y selected en el elemento SELECT, esa opción se muestra solo como un "placeholder" inicial y no será seleccionable una vez que el usuario haya elegido otra opción.
+
+-->
+
 <div class="formAddACtivityContainer">
-    <form class="formAddActivity">
-        <div class="form-group">
-            <label for="activityName">Nombre de la actividad</label>
-            <input type="text" class="form-control" id="activityName" placeholder="Nombre de la actividad">
+    <select #activitySelect class="form-control" [formControl]="activityName" class="my-5 form-select">
+        <option value="" disabled selected>Tipo Actividad</option>
+        <option *ngFor="let eachActivity of allActivities" [value]="eachActivity.name">{{eachActivity.name}}</option>
+    </select>
+    <select #monitorSelect1 class="form-control" [formControl]="activityMonitorName1" class="mb-4 form-select">
+        <option value="" disabled selected>Monitor 1</option>
+        <option *ngFor="let eachMonitor of allMonitors" [value]="eachMonitor.name">{{eachMonitor.name}}</option>
+    </select>
+    <select #monitorSelect2 class="form-control" [formControl]="activityMonitorName2" class="mb-5 form-select">
+        <option value="" disabled selected>Monitor N</option>
+        <option *ngFor="let eachMonitor of allMonitors" [value]="eachMonitor.name">{{eachMonitor.name}}</option>
+    </select>
+
+    <div>
+        <button (click)="saveActivity()">ACEPTAR</button>
+        <button (click)="closeFormActivity()">CANCELAR</button>
+    </div>
 </div>
