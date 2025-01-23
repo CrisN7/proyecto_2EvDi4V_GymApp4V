@@ -4,10 +4,12 @@ import { ActivitiesContainerComponent } from './activities-container/activities-
 import { ActivityComponent } from "./activity/activity.component";
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 
+import { HammerModule } from '@angular/platform-browser';
+import { IgxCalendarModule } from 'igniteui-angular';
 
 @Component({
   selector: 'app-root',
-  imports: [NavbarComponent, ActivitiesContainerComponent, ActivityComponent, RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [NavbarComponent, ActivitiesContainerComponent, ActivityComponent, RouterOutlet, RouterLink, RouterLinkActive, IgxCalendarModule, HammerModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 }) 

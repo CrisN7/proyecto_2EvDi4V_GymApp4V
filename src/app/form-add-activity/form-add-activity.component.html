@@ -3,24 +3,38 @@ disabled: Impide que se pueda seleccionar esta opción.
 selected: La marca como seleccionada por defecto.
 Al usar disabled y selected en el elemento SELECT, esa opción se muestra solo como un "placeholder" inicial y no será seleccionable una vez que el usuario haya elegido otra opción.
 
+[formGroup] es una directiva que le indica a Angular que el formulario HTML debe estar vinculado a un FormGroup específico.
+activityForm es el nombre del FormGroup que debes haber definido en el componente TypeScript. Es decir, el formulario en la vista se conecta con el objeto contactForm de tu componente.
+
+formControlName="activityNameSelected": Dentro del formulario, cada campo de entrada (input, select, etc.) se vincula a un control de formulario(formControl) mediante la directiva formControlName. Aquí, el "activityNameSelected" se refiere a la clave del control dentro del FormGroup (en este caso, activityNameSelected es un control dentro de activityForm).
 -->
 
 <div class="formAddACtivityContainer">
-    <select #activitySelect class="form-control" [formControl]="activityName" class="my-5 form-select">
-        <option value="" disabled selected>Tipo Actividad</option>
-        <option *ngFor="let eachActivity of allActivities" [value]="eachActivity.name">{{eachActivity.name}}</option>
-    </select>
-    <select #monitorSelect1 class="form-control" [formControl]="activityMonitorName1" class="mb-4 form-select">
-        <option value="" disabled selected>Monitor 1</option>
-        <option *ngFor="let eachMonitor of allMonitors" [value]="eachMonitor.name">{{eachMonitor.name}}</option>
-    </select>
-    <select #monitorSelect2 class="form-control" [formControl]="activityMonitorName2" class="mb-5 form-select">
-        <option value="" disabled selected>Monitor N</option>
-        <option *ngFor="let eachMonitor of allMonitors" [value]="eachMonitor.name">{{eachMonitor.name}}</option>
-    </select>
+    <h6>{{selectedDate}}</h6>
+    <h6>valor: {{activitiesGroupedByDate}}</h6>
+    <form>
+        <select #activitySelect class="form-control" class="my-5 form-select">
+            <option value="" disabled selected>Tipo Actividad</option>
+            <option
+            *ngFor="let eachActivity of allActivities; let i = index" 
+            [value]="eachActivity.name" 
+            [id]="i">
+            {{eachActivity.name}}
+            </option>
+        </select>
+        <select #monitorSelect1 class="form-control" class="mb-4 form-select">
+            <option value="" disabled selected>Monitor 1</option>
+            <option *ngFor="let eachMonitor of allMonitors" [value]="eachMonitor.name">{{eachMonitor.name}}</option>
+        </select>
+        <select #monitorSelect2 class="form-control" class="mb-5 form-select">
+            <option value="" disabled selected>Monitor N</option>
+            <option *ngFor="let eachMonitor of allMonitors" [value]="eachMonitor.name">{{eachMonitor.name}}</option>
+        </select>
+        <div>
+            <button type="button" (click)="saveActivity()">ACEPTAR</button>
+            <button type="button" (click)="closeFormActivity()">CANCELAR</button>
+        </div>
 
-    <div>
-        <button (click)="saveActivity()">ACEPTAR</button>
-        <button (click)="closeFormActivity()">CANCELAR</button>
-    </div>
+        <div (click)="showallacts()">test</div>
+    </form>
 </div>

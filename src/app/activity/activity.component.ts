@@ -16,7 +16,7 @@ import { DeleteAlertComponent } from "../delete-alert/delete-alert.component";
 
 export class ActivityComponent {
 
-  activitiesOfTheDay: { [clave: string]: Activity } = {};
+  activitiesOfTheDay: { [clave: string]: Activity } = {};//Indica que activitiesOfTheDay es un objeto cuyas claves son de tipo string (lo que está dentro de los corchetes []) y cuyos valores son de tipo Activity.
   isFormHidden: boolean = true;
   isDeleteAlertHidden: boolean = true;
   activitySentToEdit: Activity | undefined;//Si el componente padre y el hijo se crean al mismo tiempo, y el padre(osea este componente que seria el padre del form-add-activity) inicializa el valor del @Input (por ejemplo, directamente en su plantilla o lógica), Angular detectará esa asignación inicial y ejecutará el método ngOnChanges del hijo una vez para reflejar el valor inicial recibido.
@@ -30,20 +30,19 @@ export class ActivityComponent {
 
   showDeleteAlert(){
     this.isDeleteAlertHidden = false;
-
-    
   }
+
 
   showActivityForm(activity?: Activity) {//Declaramos un parámetro opcional utilizando el operador ?. Deben estar al final de la lista de parámetros, después de los obligatorios. Si no se proporciona un parámetro opcional, su valor por defecto será UNDEFINED dentro de la función
     this.isFormHidden = false;
 
-    console.log("fuera del if " +this.activitySentToEdit);
-    if(activity !== undefined) {
-      console.log("dentro del if " + this.activitySentToEdit);
+    console.log("fuera del if del act comp " +this.activitySentToEdit);
+    if( activity !== undefined) {
+      console.log("dentro del if del act comp " + this.activitySentToEdit);
       this.activitySentToEdit = activity;
       return;
     }
-
+    
     this.activitySentToEdit = undefined;
   }
 }

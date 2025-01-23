@@ -1,0 +1,13 @@
+
+<!--
+
+-->
+<div class="carousel">
+    <div class="carousel-container"> 
+        <app-monitor-card class="carouselItem" *ngFor="let eachMonitor of visibleMonitors" [monitorReceived]="eachMonitor"></app-monitor-card>
+    </div>
+    <!-- Controles -->
+    <img src="icons/leftArrow.svg" alt="leftArrow-icon" class="control prev" (click)="prevSlide()"  >
+    <img src="icons/rightArrow.svg" alt="rightArrow-icon" class="control next" (click)="nextSlide()">
+</div>
+

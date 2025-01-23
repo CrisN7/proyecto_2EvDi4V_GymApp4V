@@ -1,0 +1,16 @@
+<img src="icons/add.svg" alt="add-icon" class="addIcon" (click)="showFormMonitor()">
+
+<div class="cardMonitorContainer" *ngIf="monitorReceived !== undefined">
+    <div class="w-100 h-50 d-flex justify-content-between mb-3">
+        <img src="icons/trash.svg" alt="trash-icon" class="optionsIcon" (click)="showDeleteAlert(monitorReceived)">
+        <img src="icons/person.svg" alt="person-icon" class="monitorImg">
+        <img src="icons/edit.svg" alt="edit-icon" class="optionsIcon" (click)="showFormMonitor(monitorReceived)">
+    </div>
+    <div class="text-center">
+        <p>{{monitorReceived.name}}</p> 
+        <p>{{monitorReceived.email}}</p>
+        <p>{{monitorReceived.telephoneNumber}}</p>
+    </div>
+</div>
+<app-form-monitor [hidden]="isFormMonitorHidden" [monitorToEdit]="monitorSentToEdit" (closeFormEventEmitter)="isFormMonitorHidden = $event"></app-form-monitor>
+<app-delete-alert [hidden]="isDeleteAlertHidden" (closeDeleteAlertEventEmitter)="isDeleteAlertHidden = $event"></app-delete-alert>

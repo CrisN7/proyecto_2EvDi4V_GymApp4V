@@ -13,11 +13,7 @@ export class DeleteAlertComponent {
     this.closeDeleteAlertEventEmitter.emit(true);
   }
 
-
-
   deleteActivity() {
     console.log("Activity deleted");
   }
-
-  
 }
