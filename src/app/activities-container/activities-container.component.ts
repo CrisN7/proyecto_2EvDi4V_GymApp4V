@@ -3,6 +3,7 @@ import { ActivityComponent } from "../activity/activity.component";
 import { DateRangeDescriptor, DateRangeType, IgxCalendarComponent } from 'igniteui-angular';
 import { CommonModule } from '@angular/common';
 import { ComponentsCommunicationService } from '../services/components-communication.service';
+import { ActivitiesGroupedByDateService } from '../services/activities-grouped-by-date.service';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { ComponentsCommunicationService } from '../services/components-communica
   templateUrl: './activities-container.component.html',
   styleUrl: './activities-container.component.scss'
 })
-export class ActivitiesContainerComponent {
+export class ActivitiesContainerComponent implements OnInit{
 
   disabledDates: DateRangeDescriptor[];
   currentDate: Date = new Date();
@@ -21,7 +22,7 @@ export class ActivitiesContainerComponent {
     day: 'numeric',  // Día del mes
   }).replaceAll("de ", "");
 
-  constructor(private communicationService: ComponentsCommunicationService) {
+  constructor(private communicationService: ComponentsCommunicationService, private savedActivitiesService: ActivitiesGroupedByDateService) {
     // Configurar las fechas deshabilitadas
     this.currentDate.setHours(0, 0, 0, 0); // Asegurar que no haya horas en la comparación
     this.disabledDates = [
@@ -30,8 +31,13 @@ export class ActivitiesContainerComponent {
         dateRange: [this.currentDate],   // Fechas hasta hoy (exclusivo)
       },
     ];
+  }
+
+  ngOnInit(){
 
   }
+
+  //dateToSend: Date | Date [] = new Date();
 
   sendSelectedDate(selectedDate: Date | Date[]){
 
@@ -44,8 +50,10 @@ export class ActivitiesContainerComponent {
       }).replaceAll("de ", "");
       console.log(this.fechaActualEspanol);
       console.log(selectedDate); 
+      console.log(selectedDate.toString());
+  
 
-      this.communicationService.sendDate(this.currentDate);
+      //this.communicationService.sendDate(this.currentDate);
     }
     
   }

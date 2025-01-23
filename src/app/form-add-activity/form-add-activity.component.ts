@@ -149,6 +149,8 @@ export class FormAddActivityComponent implements OnChanges, AfterViewInit, OnIni
   }
 
   activitiesGroupedByDate: { [keyUniqueDate: string]: {[keyNumberActivity: string]: Activity} } = {};
+  @Input() activityKey: string = ""; 
+  @Input() receivedDate: Date = new Date();
   saveActivity() {
 
     const activitySelectOptions = this.activitySelect.nativeElement.options;
@@ -188,7 +190,7 @@ export class FormAddActivityComponent implements OnChanges, AfterViewInit, OnIni
       [monitor1Selected]
     );
 
-    this.savedActivitiesService.addActivityFromDate(this.selectedDate, "activity1", savedActivity);
+    this.savedActivitiesService.addActivityFromDate(this.receivedDate, this.activityKey, savedActivity);
   }
 
   showallacts(){
