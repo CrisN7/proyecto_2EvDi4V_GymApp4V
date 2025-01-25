@@ -11,6 +11,9 @@ export class FormMonitorComponent {
 
   @Input() monitorToEdit: Monitor | undefined;
 
+  //manerar la var de arriba para el form
+
+
   @Output() closeFormEventEmitter = new EventEmitter<boolean>();
   closeFormMonitor() {
     this.closeFormEventEmitter.emit(true);

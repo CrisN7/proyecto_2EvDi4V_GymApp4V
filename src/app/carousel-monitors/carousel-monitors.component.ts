@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { MonitorsService } from '../services/monitors.service';
 import { Monitor } from '../models/monitor';
 import { MonitorCardComponent } from "../monitor-card/monitor-card.component";
-
+import { FormMonitorComponent } from "../form-monitor/form-monitor.component";
+import { DeleteAlertComponent } from "../delete-alert/delete-alert.component";
+import { Activity } from '../models/activity';
 @Component({
   selector: 'app-carousel-monitors',
-  imports: [CommonModule, MonitorCardComponent],
+  imports: [CommonModule, MonitorCardComponent, FormMonitorComponent, DeleteAlertComponent],
   templateUrl: './carousel-monitors.component.html',
   styleUrl: './carousel-monitors.component.scss'
 })
@@ -47,7 +49,31 @@ export class CarouselMonitorsComponent {
   }
 
 
+  isFormMonitorHidden = true;
+  monitorToEdit: Monitor | undefined;
+  showFormMonitor(Monitor?: Monitor) {
+    this.isFormMonitorHidden = false;
+    
+    if(Monitor !== undefined) {
+      this.monitorToEdit = Monitor;
+      return;
+    }
 
- 
+    this.monitorToEdit = undefined;
+  }
+
+
+  
+  isDeleteAlertHidden = true;
+  showDeleteAlert(objectToDelete: Monitor | Activity) {
+    this.isDeleteAlertHidden = false;
+
+    //esto aca no va
+    if (objectToDelete instanceof Monitor) {
+      console.log('Deleting Monitor:', objectToDelete);
+    } else if (objectToDelete instanceof Activity) {
+      console.log('Deleting Activity:', objectToDelete);
+    }
+  }
 
 }
