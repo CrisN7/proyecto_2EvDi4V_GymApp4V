@@ -1,8 +1,8 @@
 <div class="cardMonitorContainer" *ngIf="monitorReceived !== undefined">
     <div class="w-100 h-50 d-flex justify-content-between mb-3">
-        <img src="icons/trash.svg" alt="trash-icon" class="optionsIcon" (click)="showDeleteAlert(monitorReceived)">
+        <img src="icons/trash.svg" alt="trash-icon" class="optionsIcon" (click)="showDeleteAlert(monitorIndex)">
         <img src="icons/person.svg" alt="person-icon" class="monitorImg">
-        <img src="icons/edit.svg" alt="edit-icon" class="optionsIcon" (click)="showMonitorForm(monitorReceived)">
+        <img src="icons/edit.svg" alt="edit-icon" class="optionsIcon" (click)="showMonitorForm([monitorIndex, monitorReceived])">
     </div>
     <div class="text-center">
         <p>{{monitorReceived.name}}</p>

@@ -13,5 +13,19 @@ export class MonitorsService {
 
   monitorsList: Monitor[] = [this.monitorGoyena, this.monitorRodriguez, this.monitorDominguez, this.monitorJoaquin];
 
-  constructor() { }
+  constructor() {
+
+  }
+
+  addMonitor(monitor: Monitor){
+    this.monitorsList.push(monitor);
+  }
+
+  editMonitor(indexMonitor: number, monitor: Monitor){
+    this.monitorsList[indexMonitor] = monitor;
+  }
+  
+  deleteMonitor(monitorIndex: number){
+    this.monitorsList.splice(monitorIndex, 1);
+  }
 }

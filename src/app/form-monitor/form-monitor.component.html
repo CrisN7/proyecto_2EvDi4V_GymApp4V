@@ -1,15 +1,20 @@
 <div class="formMonitorContainer">
+
     <div class="topIcons">
-        <img src="icons/person.svg" alt="person-icon">
-        <img src="icons/add.svg" alt="add-icon">
+    <img src="icons/person.svg" alt="person-icon">
+    <img src="icons/add.svg" alt="add-icon">
     </div>
     
-    <input type="text">
-    <input type="text">
-    <input type="text">
+    <input type="text" [formControl]="name" placeholder="Ingresá tu nombre...">
+    <input type="text" [formControl]="email" placeholder="Ingresá tu email...">
+    <input type="text" [formControl]="telephoneNumber" placeholder="Ingresá tu teléfono...">
     
     <div>
-        <button>ACEPTAR</button>
+        <button *ngIf="monitorToEdit && monitorToEdit[0] !== undefined; else createMonitorButton" (click)="saveMonitor(monitorToEdit[0])">ACEPTAR</button>
+        <ng-template #createMonitorButton>
+        <button (click)="saveMonitor()">ACEPTAR</button>
+        </ng-template>
         <button (click)="closeFormMonitor()">CANCELAR</button>
     </div>
+    
 </div>

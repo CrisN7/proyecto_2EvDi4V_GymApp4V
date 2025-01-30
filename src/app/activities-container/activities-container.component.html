@@ -1,12 +1,12 @@
 
 <article class="calendar-wrapper">
-    <igx-calendar [hasHeader]="false" [disabledDates]="disabledDates" [selection]="'single'" (selected)="sendSelectedDate($event)"></igx-calendar>
+    <igx-calendar *ngIf="showCalendar" [hasHeader]="false" [disabledDates]="disabledDates" [selection]="'single'" (selected)="sendSelectedDate($event)" [value]="currentDate"></igx-calendar>
 </article>
 <div class="activitiesContainer mx-auto">
     <div id="topContainer" class="d-flex justify-content-between">        
-        <img src="icons/leftArrow.svg" alt="leftArrow">        
+        <img src="icons/leftArrow.svg" alt="leftArrow" (click)="changeDate('previous')">        
         <p class="display-6 align-self-center">{{fechaActualEspanol}}</p>        
-        <img src="icons/rightArrow.svg" alt="rightArrow">
+        <img src="icons/rightArrow.svg" alt="rightArrow" (click)="changeDate('next')">
     </div>
     <app-activity [receivedDate]="currentDate"></app-activity>
 </div>

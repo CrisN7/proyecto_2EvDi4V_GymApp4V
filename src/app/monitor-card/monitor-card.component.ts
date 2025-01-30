@@ -11,16 +11,18 @@ import { CommonModule } from '@angular/common';
 export class MonitorCardComponent {
 
   @Input() monitorReceived!: Monitor;
-  constructor() { 
+  @Input() monitorIndex!: number;
+
+
+  monitorToEdit: [number, Monitor] = [0, new Monitor()];
+  
+  @Output() showMonitorFormEventEmitter = new EventEmitter<[number, Monitor]>();
+  showMonitorForm(monitorToEdit: [number, Monitor]) {
+    this.showMonitorFormEventEmitter.emit(monitorToEdit);
   }
 
-  @Output() showMonitorFormEventEmitter = new EventEmitter<Monitor>();
-  showMonitorForm(monitor: Monitor) {
-    this.showMonitorFormEventEmitter.emit(monitor);
-  }
-
-  @Output() showDeleteAlertEventEmitter = new EventEmitter<Monitor>();
-  showDeleteAlert(monitor: Monitor) {
-    this.showDeleteAlertEventEmitter.emit(monitor);
+  @Output() showDeleteAlertEventEmitter = new EventEmitter<number>();
+  showDeleteAlert(monitorIndex: number) {
+    this.showDeleteAlertEventEmitter.emit(monitorIndex);
   }
 }

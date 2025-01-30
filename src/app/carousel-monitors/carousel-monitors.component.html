@@ -1,15 +1,11 @@
-
-<!--
-
--->
 <img src="icons/add.svg" alt="add-icon" class="addIcon" (click)="showFormMonitor()">
 <div class="carousel" >
     <div class="carousel-container"> 
-        <app-monitor-card class="carouselItem" *ngFor="let eachMonitor of visibleMonitors" [monitorReceived]="eachMonitor"   (showMonitorFormEventEmitter)="showFormMonitor($event)" (showDeleteAlertEventEmitter)="showDeleteAlert($event)"></app-monitor-card>
+        <app-monitor-card class="carouselItem" *ngFor="let eachMonitor of visibleMonitors; let monitorIndex = index" [monitorReceived]="eachMonitor" [monitorIndex]="monitorIndex" (showMonitorFormEventEmitter)="showFormMonitor($event)" (showDeleteAlertEventEmitter)="showDeleteAlert($event)"></app-monitor-card>
     </div>
     <!-- Controles -->
     <img src="icons/leftArrow.svg" alt="leftArrow-icon" class="control prev" (click)="prevSlide()"  >
     <img src="icons/rightArrow.svg" alt="rightArrow-icon" class="control next" (click)="nextSlide()">
 </div>
 <app-form-monitor [hidden]="isFormMonitorHidden" [monitorToEdit]="monitorToEdit" (closeFormEventEmitter)="isFormMonitorHidden = $event"></app-form-monitor>
-<app-delete-alert [hidden]="isDeleteAlertHidden" (closeDeleteAlertEventEmitter)="isDeleteAlertHidden = $event"></app-delete-alert>
+<app-delete-alert [hidden]="isDeleteAlertHidden" [indexMonitorAEliminar]="indexMonitorAEliminar" (closeDeleteAlertEventEmitter)="isDeleteAlertHidden = $event" [mensajeDeObjetoAEliminar]="'¿Estás seguro de que deseas eliminar este monitor?'" [objetoAEliminar]="'Monitor'"></app-delete-alert>

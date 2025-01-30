@@ -10,7 +10,7 @@ formControlName="activityNameSelected": Dentro del formulario, cada campo de ent
 -->
 
 <div class="formAddACtivityContainer">
-    <form>
+    
         <select #activitySelect class="form-control" class="my-5 form-select">
             <option value="" disabled selected>Tipo Actividad</option>
             <option
@@ -31,8 +31,5 @@ formControlName="activityNameSelected": Dentro del formulario, cada campo de ent
         <div>
             <button type="button" (click)="saveActivity()">ACEPTAR</button>
             <button type="button" (click)="closeFormActivity()">CANCELAR</button>
-        </div>
-
-        <div (click)="showallacts()">test</div>
-    </form>
+        </div>    
 </div>

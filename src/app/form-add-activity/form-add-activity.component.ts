@@ -4,14 +4,13 @@ import { Activity } from '../models/activity';
 import { CommonModule } from '@angular/common';
 import { Monitor } from '../models/monitor';
 import { MonitorsService } from '../services/monitors.service';
-import { DeleteAlertComponent } from "../delete-alert/delete-alert.component";
 import { ComponentsCommunicationService } from '../services/components-communication.service';
 import { ActivitiesGroupedByDateService } from '../services/activities-grouped-by-date.service';
 
 
 @Component({
   selector: 'app-form-add-activity',
-  imports: [ CommonModule, DeleteAlertComponent],
+  imports: [ CommonModule],
   templateUrl: './form-add-activity.component.html',
   styleUrl: './form-add-activity.component.scss'
 })
@@ -22,7 +21,7 @@ export class FormAddActivityComponent implements OnChanges, AfterViewInit, OnIni
   selectedDate: Date = new Date();
 
   constructor(private activitiesService: ActivitiesService, private monitorsService: MonitorsService, private communicationService: ComponentsCommunicationService, private savedActivitiesService: ActivitiesGroupedByDateService) { 
-    this.allActivities = activitiesService.activitiesList;
+    this.allActivities = this.activitiesService.activitiesList;
     this.allMonitors = monitorsService.monitorsList;
   }
 
@@ -32,7 +31,7 @@ export class FormAddActivityComponent implements OnChanges, AfterViewInit, OnIni
 
 
   @Input() activityToEdit: Activity | undefined;
-  //Esto no es buena practica segun chatgpt
+  //Esto no es buena practica segun chatgpt TODO
   //let activitySelectOptions: HTMLOptionsCollection = (document.getElementById('activitySelect') as HTMLSelectElement).options;
   //let monitorSelect1Options: HTMLOptionsCollection = (document.getElementById('monitorSelect1') as HTMLSelectElement).options;
   //let monitorSelect2Options: HTMLOptionsCollection = (document.getElementById('monitorSelect2') as HTMLSelectElement).options;
@@ -50,9 +49,6 @@ export class FormAddActivityComponent implements OnChanges, AfterViewInit, OnIni
       let activitySelectOptions = this.activitySelect.nativeElement.options;
       let monitorSelect1Options = this.monitorSelect1.nativeElement.options;
       let monitorSelect2Options = this.monitorSelect2.nativeElement.options;
-      //this.clearSelectedOptions(activitySelectOptions);
-      //this.clearSelectedOptions(monitorSelect1Options);
-      //this.clearSelectedOptions(monitorSelect2Options);
 
       for(let i = 0; i < activitySelectOptions.length; i++) {
 
@@ -106,9 +102,6 @@ export class FormAddActivityComponent implements OnChanges, AfterViewInit, OnIni
       let activitySelectOptions = this.activitySelect.nativeElement.options;
       let monitorSelect1Options = this.monitorSelect1.nativeElement.options;
       let monitorSelect2Options = this.monitorSelect2.nativeElement.options;
-      //this.clearSelectedOptions(activitySelectOptions);
-      //this.clearSelectedOptions(monitorSelect1Options);
-      //this.clearSelectedOptions(monitorSelect2Options);
 
       for(let i = 0; i < activitySelectOptions.length; i++) {
 
@@ -136,16 +129,8 @@ export class FormAddActivityComponent implements OnChanges, AfterViewInit, OnIni
     }
   }
 
-  clearSelectedOptions(options: HTMLOptionsCollection) {
-    for(let i = 0; i < options.length; i++) {
-      options[i].selected = false;
-    }
-  }
-
   ngAfterViewInit() {
-    //console.log("afterViewInit del form ts: " + this.isViewInitialized);
     this.isViewInitialized = true;
-    //console.log("afterViewInit del form ts: " + this.isViewInitialized);
   }
 
   activitiesGroupedByDate: { [keyUniqueDate: string]: {[keyNumberActivity: string]: Activity} } = {};
@@ -181,20 +166,15 @@ export class FormAddActivityComponent implements OnChanges, AfterViewInit, OnIni
     }
     let monitor2Selected: Monitor = this.allMonitors[monitor2SelectOptions.selectedIndex - 1];
 
-    
-    console.log(errorMessage);
-
     let savedActivity: Activity = new Activity(
       activitySelected,
       this.allActivities[activitySelectOptions.selectedIndex - 1].img,//Le resto 1 porque tengo un option demás en cada select. selectedIndex: Es una propiedad nativa del elemento <select> que devuelve el índice del <option> seleccionado.
-      [monitor1Selected]
+      monitor2Selected ? [monitor1Selected, monitor2Selected] : [monitor1Selected]//Condición para incluir monitor2Selected si no es undefined
     );
 
     this.savedActivitiesService.addActivityFromDate(this.receivedDate, this.activityKey, savedActivity);
-  }
 
-  showallacts(){
-    this.savedActivitiesService.showacts();
+    this.closeFormEventEmitter.emit(true);//El método emit() de EventEmitter se usa para enviar un evento desde el hijo hacia el padre. Cuando llamas a emit(), estás "disparando" el evento y, opcionalmente, puedes incluir un valor que se envía al componente padre.
   }
 
 

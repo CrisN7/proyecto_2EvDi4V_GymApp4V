@@ -18,7 +18,7 @@
             
             <img class="ms-auto activityImg primary-color" [src]="activitiesOfTheDay2['activity1'].img" alt="spinning-icon">
             <div class="activityOptions">
-                <img class="activityOptionIcon" src="icons/trash.svg" alt="trash-icon" (click)="showDeleteAlert()">
+                <img class="activityOptionIcon" src="icons/trash.svg" alt="trash-icon" (click)="showDeleteAlert('activity1')">
                 <img class="activityOptionIcon" src="icons/edit.svg" alt="edit-icon" (click)="showActivityForm('activity1', activitiesOfTheDay2['activity1'])">
             </div>
         </div>
@@ -48,7 +48,7 @@
             </div>
             <img class="ms-auto activityImg primary-color" [src]="activitiesOfTheDay2['activity2'].img" alt="spinning-icon">
             <div class="activityOptions">
-                <img class="activityOptionIcon" src="icons/trash.svg" alt="trash-icon" (click)="showDeleteAlert()">
+                <img class="activityOptionIcon" src="icons/trash.svg" alt="trash-icon" (click)="showDeleteAlert('activity2')">
                 <img class="activityOptionIcon" src="icons/edit.svg" alt="edit-icon" (click)="showActivityForm('activity2', activitiesOfTheDay2['activity2'])">
             </div>
         </div>
@@ -78,7 +78,7 @@
             </div> 
             <img class="ms-auto activityImg primary-color" [src]="activitiesOfTheDay2['activity3'].img" alt="spinning-icon">
             <div class="activityOptions">
-                <img class="activityOptionIcon " src="icons/trash.svg" alt="trash-icon" (click)="showDeleteAlert()">
+                <img class="activityOptionIcon " src="icons/trash.svg" alt="trash-icon" (click)="showDeleteAlert('activity3')">
                 <img class="activityOptionIcon" src="icons/edit.svg" alt="edit-icon" (click)="showActivityForm('activity3', activitiesOfTheDay2['activity3'])">
             </div>
         </div>
@@ -94,6 +94,6 @@
 <!--
 Durante la creación, Angular evalúa el enlace [activityToEdit]="'Valor Inicial'" y asigna ese valor a la propiedad decorada con @Input en el componente hijo.
 Como este valor fue "cambiado" desde undefined (por defecto) a "Valor Inicial", Angular ejecuta automáticamente el ngOnChanges en el hijo.
-Esto sucede porque Angular considera la inicialización de una propiedad decorada con @Input como un cambio en el valor, incluso si es la primera vez que se asigna.
+Esto sucede porque Angular considera la inicialización de una propiedad decorada con @Input como un cambio en el valor, incluso si es la primera vez que se asigna. ¿Estás seguro de que deseas eliminar esta actividad?
 -->
-<app-delete-alert [hidden]="isDeleteAlertHidden" (closeDeleteAlertEventEmitter)="isDeleteAlertHidden = $event"></app-delete-alert>
+<app-delete-alert [hidden]="isDeleteAlertHidden" (closeDeleteAlertEventEmitter)="isDeleteAlertHidden = $event" [keysToDeleteActivity]="keysToDeleteActivity" [mensajeDeObjetoAEliminar]="'¿Estás seguro de que deseas eliminar esta actividad?'" [objetoAEliminar]="'Activity'"></app-delete-alert>

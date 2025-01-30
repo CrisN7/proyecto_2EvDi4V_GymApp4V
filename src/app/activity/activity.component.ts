@@ -16,7 +16,7 @@ import { ActivitiesGroupedByDateService } from '../services/activities-grouped-b
   styleUrl: './activity.component.scss'
 })
 
-export class ActivityComponent implements OnInit, OnChanges{
+export class ActivityComponent implements OnChanges{
 
   isFormHidden: boolean = true;
   isDeleteAlertHidden: boolean = true;
@@ -32,19 +32,37 @@ export class ActivityComponent implements OnInit, OnChanges{
 
     this.receivedDate.setHours(0,0,0);
     this.activitiesOfTheDay2 = this.savedActivitiesService.getActivitiesFromDate(this.receivedDate);
+
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.activitiesOfTheDay2 = this.savedActivitiesService.getActivitiesFromDate(this.receivedDate);
   }
 
-  ngOnInit(): void {
-    
+
+
+
+
+
+  keysToDeleteActivity: string[] = []; 
+  //keyNumberActivity: string = "";
+  showDeleteAlert(keyNumberActivity: string){
+    this.isDeleteAlertHidden = false;
+    //this.keyNumberActivity = keyNumberActivity;
+
+    this.keysToDeleteActivity.length = 0;//Limpiamos el array para que no se nos acumulen los keys(fecha unica, y numero de actividad unico) de cada actividad
+    this.keysToDeleteActivity.push(this.receivedDate.toString(), keyNumberActivity);
+    console.log(this.receivedDate.toString());
+    console.log(keyNumberActivity);
   }
 
-  showDeleteAlert(){
-    this.isDeleteAlertHidden = false;
-  }
+
+
+
+
+
+
+
 
   activityKey: string = "";
   showActivityForm(activityKey: string, activity?: Activity) {//Declaramos un parámetro opcional utilizando el operador ?. Deben estar al final de la lista de parámetros, después de los obligatorios. Si no se proporciona un parámetro opcional, su valor por defecto será UNDEFINED dentro de la función
