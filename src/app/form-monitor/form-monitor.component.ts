@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges,  } from '@angular/core';
 import { Monitor } from '../models/monitor';
-import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MonitorsService } from '../services/monitors.service';
 
@@ -64,8 +64,6 @@ export class FormMonitorComponent implements OnChanges{
       this.email.reset();
       this.telephoneNumber.reset();
       this.closeFormEventEmitter.emit(true);
-    } else {
-      console.log("Formulario inválido. No se puede guardar el monitor.");
     }
   }
 

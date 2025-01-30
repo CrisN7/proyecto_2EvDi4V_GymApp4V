@@ -1,9 +1,7 @@
-import { AfterViewInit, ChangeDetectorRef, Component, DoCheck, OnInit, ViewChild } from '@angular/core';
+import { Component} from '@angular/core';
 import { ActivityComponent } from "../activity/activity.component";
 import { DateRangeDescriptor, DateRangeType, IgxCalendarComponent } from 'igniteui-angular';
 import { CommonModule } from '@angular/common';
-import { ComponentsCommunicationService } from '../services/components-communication.service';
-import { ActivitiesGroupedByDateService } from '../services/activities-grouped-by-date.service';
 
 
 @Component({
@@ -22,35 +20,29 @@ export class ActivitiesContainerComponent {
     day: 'numeric',  // Día del mes
   }).replaceAll("de ", "");
 
-  constructor(private communicationService: ComponentsCommunicationService, private savedActivitiesService: ActivitiesGroupedByDateService, private cdr: ChangeDetectorRef) {
+  constructor() {
     
-    // Configurar las fechas deshabilitadas
-    this.currentDate.setHours(0, 0, 0, 0); // Asegurar que no haya horas en la comparación
+    //Configuramo las fechas deshabilitadas
+    this.currentDate.setHours(0, 0, 0, 0);
     this.disabledDates = [
       {
-        type: DateRangeType.Before,//Tipo de rango "Antes de"
-        dateRange: [this.currentDate],//Fechas hasta hoy (exclusivo)
+        type: DateRangeType.Before,
+        dateRange: [this.currentDate],
       },
     ];
   }
 
   showCalendar: boolean = true;
 
-  //dateToSend: Date | Date [] = new Date();
-
   sendSelectedDate(selectedDate: Date | Date[]){
 
     if(selectedDate instanceof Date){
       this.currentDate = selectedDate;
       this.fechaActualEspanol = selectedDate.toLocaleDateString('es-ES', {
-        year: 'numeric', // Año
-        month: 'long',   // Mes en texto
-        day: 'numeric',  // Día del mes
+        year: 'numeric', //Año
+        month: 'long',   //Mes en texto
+        day: 'numeric',  //Día del mes
       }).replaceAll("de ", "");
-      console.log(this.fechaActualEspanol);
-      console.log(selectedDate); 
-      console.log(selectedDate.toString());
-      //this.communicationService.sendDate(this.currentDate);
     }
   }
 
@@ -65,15 +57,14 @@ export class ActivitiesContainerComponent {
       newDate.setDate(newDate.getDate() + 1); // Suma un día
     }
 
-    this.currentDate = newDate; // Actualiza el calendario
+    this.currentDate = newDate;
 
     this.fechaActualEspanol = this.currentDate.toLocaleDateString('es-ES', {
-      year: 'numeric', // Año
-      month: 'long',   // Mes en texto
-      day: 'numeric',  // Día del mes
+      year: 'numeric',
+      month: 'long', 
+      day: 'numeric',  
     }).replaceAll("de ", "");
 
-    // 🔥 🔄 Se oculta y vuelve a mostrar el calendario para forzar la actualización
     this.showCalendar = false;
     setTimeout(() => {
       this.showCalendar = true;

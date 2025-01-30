@@ -1,7 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Activity } from '../models/activity';
-import { ActivitiesService } from '../services/activities.service';
-import {AsyncPipe } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { FormAddActivityComponent } from "../form-add-activity/form-add-activity.component";
 import { DeleteAlertComponent } from "../delete-alert/delete-alert.component";
@@ -11,7 +9,7 @@ import { ActivitiesGroupedByDateService } from '../services/activities-grouped-b
 
 @Component({
   selector: 'app-activity',
-  imports: [AsyncPipe, CommonModule, FormAddActivityComponent, DeleteAlertComponent],
+  imports: [CommonModule, FormAddActivityComponent, DeleteAlertComponent],
   templateUrl: './activity.component.html',
   styleUrl: './activity.component.scss'
 })
@@ -26,7 +24,7 @@ export class ActivityComponent implements OnChanges{
   @Input() receivedDate: Date = new Date();
   activitiesOfTheDay2;
 
-  constructor(private activitiesService: ActivitiesService, private communicationService: ComponentsCommunicationService, private savedActivitiesService: ActivitiesGroupedByDateService) {//TODO no entiendo porque en el template me deja usar los valores de activiesOfTheDay si no los he inicializado porque en ningun momento use este constructor
+  constructor(private communicationService: ComponentsCommunicationService, private savedActivitiesService: ActivitiesGroupedByDateService) {
 
     this.communicationService.selectedDateObservable$.subscribe((emittedDate) => {this.selectedDate = emittedDate;} );//el emittedDate es el valor emitido por el observable
 
@@ -40,28 +38,13 @@ export class ActivityComponent implements OnChanges{
   }
 
 
-
-
-
-
   keysToDeleteActivity: string[] = []; 
-  //keyNumberActivity: string = "";
   showDeleteAlert(keyNumberActivity: string){
     this.isDeleteAlertHidden = false;
-    //this.keyNumberActivity = keyNumberActivity;
 
     this.keysToDeleteActivity.length = 0;//Limpiamos el array para que no se nos acumulen los keys(fecha unica, y numero de actividad unico) de cada actividad
     this.keysToDeleteActivity.push(this.receivedDate.toString(), keyNumberActivity);
-    console.log(this.receivedDate.toString());
-    console.log(keyNumberActivity);
   }
-
-
-
-
-
-
-
 
 
   activityKey: string = "";
@@ -70,9 +53,7 @@ export class ActivityComponent implements OnChanges{
 
     this.activityKey = activityKey;
 
-    console.log("fuera del if del act comp " +this.activitySentToEdit);
     if(activityKey !== undefined && activity !== undefined) {
-      console.log("dentro del if del act comp " + this.activitySentToEdit);
       this.activitySentToEdit = activity;
       return;
     }

@@ -37,17 +37,13 @@ export class DeleteAlertComponent {
 
 
     if(this.objetoAEliminar == "Activity"){
-      console.log(this.keysToDeleteActivity);
       this.savedActivitiesService.deleteActivityFromDate(this.keysToDeleteActivity[0], this.keysToDeleteActivity[1]);
       this.closeDeleteAlertEventEmitter.emit(true);
-      console.log("Activity deleted");
       return;
     }
 
     if(this.objetoAEliminar == "Monitor"){
-      console.log("index monitor a delete" + this.indexMonitorAEliminar);
       this.monitorsService.deleteMonitor(this.indexMonitorAEliminar);
-      console.log("Monitor deleted");
       this.closeDeleteAlertEventEmitter.emit(true);
       return;
     }

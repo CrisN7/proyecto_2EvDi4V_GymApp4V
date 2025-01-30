@@ -31,10 +31,6 @@ export class FormAddActivityComponent implements OnChanges, AfterViewInit, OnIni
 
 
   @Input() activityToEdit: Activity | undefined;
-  //Esto no es buena practica segun chatgpt TODO
-  //let activitySelectOptions: HTMLOptionsCollection = (document.getElementById('activitySelect') as HTMLSelectElement).options;
-  //let monitorSelect1Options: HTMLOptionsCollection = (document.getElementById('monitorSelect1') as HTMLSelectElement).options;
-  //let monitorSelect2Options: HTMLOptionsCollection = (document.getElementById('monitorSelect2') as HTMLSelectElement).options;
 
   @ViewChild('activitySelect') activitySelect!: ElementRef<HTMLSelectElement>;
   @ViewChild('monitorSelect1') monitorSelect1!: ElementRef<HTMLSelectElement>; 
@@ -42,7 +38,6 @@ export class FormAddActivityComponent implements OnChanges, AfterViewInit, OnIni
   isViewInitialized = false;
 
   ngOnChanges(changes: SimpleChanges): void {//Este método se ejecuta automáticamente cuando cambia un valor en una propiedad decorada con @Input.
-    console.log("onchanges del form ts: " + this.activityToEdit);
     
     if (this.activityToEdit !== undefined && this.isViewInitialized) {
 

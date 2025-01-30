@@ -14,11 +14,4 @@ export class ComponentsCommunicationService {
 
   constructor() { }
 
-
-  public sendDate(selectedDate: Date) {
-    this.selectedDate.next(selectedDate);//Este método sendData permite emitir nuevos valores al Subject. Al llamar a next(data), el Subject notifica a todos los suscriptores del Observable (data$) que hay un nuevo valor disponible.
-  }
-
-
-
 }
